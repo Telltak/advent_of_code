@@ -7,6 +7,12 @@ import (
 	"os"
 )
 
+var solvers = make(map[int]Solver)
+
+func RegisterSolver(day int, solver Solver) {
+	solvers[day] = solver
+}
+
 func main() {
 	day := flag.Int("day", 1, "Day number (1-25)")
 	part := flag.Int("part", 1, "Part number (1-2)")
@@ -17,7 +23,7 @@ func main() {
 		log.Fatalf("Failed to read input: %v", err)
 	}
 
-	solver := getSolver(*day)
+	solver := solvers[*day]
 	if solver == nil {
 		log.Fatalf("Day %d not implemented", *day)
 	}
@@ -30,12 +36,4 @@ func main() {
 	}
 
 	fmt.Printf("Day %d Part %d: %d\n", *day, *part, result)
-}
-
-func getSolver(day int) Solver {
-	solvers := map[int]Solver{
-		1: &Day01{},
-		// Add more days here
-	}
-	return solvers[day]
 }

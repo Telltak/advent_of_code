@@ -13,6 +13,10 @@ go run . -day 1 -part 1
 ```go
 package main
 
+func init() {
+    RegisterSolver(XX, &DayXX{})
+}
+
 type DayXX struct{}
 
 func (d *DayXX) Part1(input string) int {
@@ -26,15 +30,9 @@ func (d *DayXX) Part2(input string) int {
 }
 ```
 
-2. Add your day to the `getSolver()` map in `main.go`:
-```go
-solvers := map[int]Solver{
-    1: &Day01{},
-    XX: &DayXX{},  // Add this line
-}
-```
+2. Add your input to `inputs/dayXX.txt`
 
-3. Add your input to `inputs/dayXX.txt`
+That's it! The day auto-registers via `init()` - no need to modify `main.go`.
 
 ## Structure
 

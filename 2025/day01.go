@@ -1,5 +1,9 @@
 package main
 
+func init() {
+	RegisterSolver(1, &Day01{})
+}
+
 type Day01 struct{}
 
 func (d *Day01) Part1(input string) int {
